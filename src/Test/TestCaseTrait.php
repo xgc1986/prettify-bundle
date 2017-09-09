@@ -8,7 +8,7 @@ namespace Xgc\CodePrettifyBundle\Test;
  *
  * @package Xgc\AsseticsBundle\Test
  *
- * @method static assertTrue(bool $value)
+ * @method static assertTrue(bool $value, ?string $message = null)
  */
 trait TestCaseTrait
 {

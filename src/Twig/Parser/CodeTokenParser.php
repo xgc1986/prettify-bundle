@@ -23,20 +23,64 @@ class CodeTokenParser extends Twig_TokenParser
      * @param Twig_Token $token
      *
      * @return Twig_Node A Twig_Node instance
+     * @throws Twig_Error_Syntax
      */
     public function parse(Twig_Token $token): Twig_Node
     {
-        $parser = $this->parser;
-        $stream = $parser->getStream();
+        $lineno = $token->getLine();
+        $stream = $this->parser->getStream();
 
-        $name = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
-        $stream->expect(Twig_Token::NAME_TYPE, '');
-        $value = $parser->getExpressionParser()->parseExpression();
+        // recovers all inline parameters close to your tag name
+        $params = \array_merge([], $this->getInlineParams());
+
+        $continue = true;
+        while ($continue) {
+            // create subtree until the decideMyTagFork() callback returns true
+            $body = $this->parser->subparse([$this, 'decideMyTagFork']);
+
+            // I like to put a switch here, in case you need to add middle tags, such
+            // as: {% mytag %}, {% nextmytag %}, {% endmytag %}.
+            $tag = $stream->next()->getValue();
+
+            if ($tag === 'endcode') {
+                $continue = false;
+            }
+
+            // you want $body at the beginning of your arguments
+            \array_unshift($params, $body);
+
+            // if your endmytag can also contains params, you can uncomment this line:
+            // $params = array_merge($params, $this->getInlineParams($token));
+            // and comment this one:
+            $stream->expect(Twig_Token::BLOCK_END_TYPE);
+        }
+
+        return new CodeNode(new Twig_Node($params), $lineno, $this->getTag());
+    }
+
+    /**
+     * @return array
+     */
+    protected function getInlineParams(): array
+    {
+        $stream = $this->parser->getStream();
+        $params = [];
+        /*while (!$stream->test(Twig_Token::BLOCK_END_TYPE)) {
+            $params[] = $this->parser->getExpressionParser()->parseExpression();
+        }*/
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
 
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
+        return $params;
+    }
 
-        return new CodeNode($name, $value, $token->getLine(), $this->getTag());
+    /**
+     * @param Twig_Token $token
+     *
+     * @return bool
+     */
+    public function decideMyTagFork(Twig_Token $token): bool
+    {
+        return $token->test(['endcode']);
     }
 
     /**
