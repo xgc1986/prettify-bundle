@@ -1,4 +1,4 @@
 services:
-  Xgc\PrettifyBundle\Twig\PrettifyExtension:
+  Xgc\CodePrettifyBundle\Twig\PrettifyExtension:
     tags: [twig.extension]
     arguments: ['@service_container']
