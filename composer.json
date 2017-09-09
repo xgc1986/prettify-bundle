@@ -30,7 +30,8 @@
   "require": {
     "php": ">=7.1",
     "fzaninotto/faker": "^1.7",
-    "twig/twig": "^2.4"
+    "twig/twig": "^2.4",
+    "xgc/assetic-bundle": "^1.0"
   },
   "require-dev": {
     "bruli/php-git-hooks": "~5.1",

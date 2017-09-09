@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "da082164a482b1700370a74231c75c82",
+    "content-hash": "c87c7e6b8d078a1fc0ffeb618459e245",
     "packages": [
         {
             "name": "fzaninotto/faker",
@@ -180,6 +180,54 @@
                 "templating"
             ],
             "time": "2017-06-07T18:47:58+00:00"
+        },
+        {
+            "name": "xgc/assetic-bundle",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xgc1986/xgc-assetic-bundle.git",
+                "reference": "0b71406370f37e2ad92fd32753ab067b3c24d757"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xgc1986/xgc-assetic-bundle/zipball/0b71406370f37e2ad92fd32753ab067b3c24d757",
+                "reference": "0b71406370f37e2ad92fd32753ab067b3c24d757",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.7",
+                "php": ">=7.1",
+                "twig/twig": "^2.4"
+            },
+            "require-dev": {
+                "bruli/php-git-hooks": "~5.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^2.1",
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^6.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xgc\\AsseticsBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Javier González Cuadrado",
+                    "email": "xgc1986@gmail.com"
+                }
+            ],
+            "description": "A quick access to php.ini values",
+            "keywords": [
+                "php",
+                "php.ini"
+            ],
+            "time": "2017-09-09T20:38:15+00:00"
         }
     ],
     "packages-dev": [
