@@ -30,28 +30,19 @@ class CodeTokenParser extends Twig_TokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
 
-        // recovers all inline parameters close to your tag name
         $params = \array_merge([], $this->getInlineParams());
 
         $continue = true;
         while ($continue) {
-            // create subtree until the decideMyTagFork() callback returns true
             $body = $this->parser->subparse([$this, 'decideMyTagFork']);
 
-            // I like to put a switch here, in case you need to add middle tags, such
-            // as: {% mytag %}, {% nextmytag %}, {% endmytag %}.
             $tag = $stream->next()->getValue();
 
             if ($tag === 'endcode') {
                 $continue = false;
             }
 
-            // you want $body at the beginning of your arguments
             \array_unshift($params, $body);
-
-            // if your endmytag can also contains params, you can uncomment this line:
-            // $params = array_merge($params, $this->getInlineParams($token));
-            // and comment this one:
             $stream->expect(Twig_Token::BLOCK_END_TYPE);
         }
 
