@@ -19,23 +19,20 @@ $ composer require xgc/code-prettify-bundle
 
 [Online](http://xgc-samples.herokuapp.com)
 
-```yaml
-xgc_assetics:
-    
-  my_assetic_collection:
-    - 'dependency1'
-    - 'http://example.com/file.js'
-    - 'http://example.com/file.css'
-    
-  dependency1:
-    - 'http://example.com/dependant.js'
-```
-
 ```twig
 <html>
-<head>
-    {{ xgc_assetics('my_assetic_collection') }}
-</head>
-<body>...</body>
+  <head>
+    {{ xgc_assetics('prettify') }}       
+  </head>
+  
+  <body>
+    {% code %}
+       function hello($string name)
+       {
+           echo 'hello world';
+       }
+    {% endcode %}
+  </body>
 </html>
 ```
+
