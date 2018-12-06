@@ -1,5 +1,5 @@
 xgc_assetics:
 
   prettify:
-    - 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?language=php&skin=desert'
+    - 'https://cdn.jsdelivr.net/gh/google/code-prettify/loader/run_prettify.js?language=php&skin=desert'
 
